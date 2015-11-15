@@ -6,17 +6,17 @@
 var should = require('should'),
   mongoose = require('mongoose'),
   User = mongoose.model('User'),
-  Article = mongoose.model('Article');
+  %CAPITALIZED% = mongoose.model('%CAPITALIZED%');
 
 /**
  * Globals
  */
-var user, article;
+var user, %MODEL%;
 
 /**
  * Unit tests
  */
-describe('Article Model Unit Tests:', function () {
+describe('%CAPITALIZED% Model Unit Tests:', function () {
   beforeEach(function (done) {
     user = new User({
       firstName: 'Full',
@@ -28,9 +28,9 @@ describe('Article Model Unit Tests:', function () {
     });
 
     user.save(function () {
-      article = new Article({
-        title: 'Article Title',
-        content: 'Article Content',
+      %MODEL% = new %CAPITALIZED%({
+        title: '%CAPITALIZED% Title',
+        content: '%CAPITALIZED% Content',
         user: user
       });
 
@@ -40,16 +40,16 @@ describe('Article Model Unit Tests:', function () {
 
   describe('Method Save', function () {
     it('should be able to save without problems', function (done) {
-      return article.save(function (err) {
+      return %MODEL%.save(function (err) {
         should.not.exist(err);
         done();
       });
     });
 
     it('should be able to show an error when try to save without title', function (done) {
-      article.title = '';
+      %MODEL%.title = '';
 
-      return article.save(function (err) {
+      return %MODEL%.save(function (err) {
         should.exist(err);
         done();
       });
@@ -57,7 +57,7 @@ describe('Article Model Unit Tests:', function () {
   });
 
   afterEach(function (done) {
-    Article.remove().exec(function () {
+    %CAPITALIZED%.remove().exec(function () {
       User.remove().exec(done);
     });
   });

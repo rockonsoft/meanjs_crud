@@ -1,9 +1,9 @@
 'use strict';
 
-// Configuring the Articles module
+// Configuring the %PLURAL_CAPITALIZED% module
 angular.module('%PLURAL%').run(['Menus',
   function (Menus) {
-    // Add the articles dropdown item
+    // Add the %PLURAL% dropdown item
     Menus.addMenuItem('topbar', {
       title: '%PLURAL_CAPITALIZED%',
       state: '%PLURAL%',

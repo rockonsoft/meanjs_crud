@@ -7,9 +7,9 @@ var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 
 /**
- * Article Schema
+ * %CAPITALIZED% Schema
  */
-var ArticleSchema = new Schema({
+var %CAPITALIZED%Schema = new Schema({
   created: {
     type: Date,
     default: Date.now
@@ -31,4 +31,4 @@ var ArticleSchema = new Schema({
   }
 });
 
-mongoose.model('Article', ArticleSchema);
+mongoose.model('%CAPITALIZED%', %CAPITALIZED%Schema);

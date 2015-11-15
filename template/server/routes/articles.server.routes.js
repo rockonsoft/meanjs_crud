@@ -7,17 +7,17 @@ var %PLURAL%Policy = require('../policies/%PLURAL%.server.policy'),
   %PLURAL% = require('../controllers/%PLURAL%.server.controller');
 
 module.exports = function (app) {
-  // Articles collection routes
+  // %PLURAL_CAPITALIZED% collection routes
   app.route('/api/%PLURAL%').all(%PLURAL%Policy.isAllowed)
     .get(%PLURAL%.list)
     .post(%PLURAL%.create);
 
-  // Single article routes
-  app.route('/api/%PLURAL%/:articleId').all(%PLURAL%Policy.isAllowed)
+  // Single %MODEL% routes
+  app.route('/api/%PLURAL%/:%MODEL%Id').all(%PLURAL%Policy.isAllowed)
     .get(%PLURAL%.read)
     .put(%PLURAL%.update)
     .delete(%PLURAL%.delete);
 
-  // Finish by binding the article middleware
-  app.param('articleId', %PLURAL%.articleByID);
+  // Finish by binding the %MODEL% middleware
+  app.param('%MODEL%Id', %PLURAL%.%MODEL%ByID);
 };

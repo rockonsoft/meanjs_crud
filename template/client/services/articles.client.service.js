@@ -1,10 +1,10 @@
 'use strict';
 
-//Articles service used for communicating with the articles REST endpoints
-angular.module('articles').factory('Articles', ['$resource',
+//%PLURAL_CAPITALIZED% service used for communicating with the %PLURAL% REST endpoints
+angular.module('%PLURAL%').factory('%PLURAL_CAPITALIZED%', ['$resource',
   function ($resource) {
-    return $resource('api/articles/:articleId', {
-      articleId: '@_id'
+    return $resource('api/%PLURAL%/:%MODEL%Id', {
+      %MODEL%Id: '@_id'
     }, {
       update: {
         method: 'PUT'

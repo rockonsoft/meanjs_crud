@@ -1,17 +1,17 @@
 'use strict';
 
 (function () {
-  // Articles Controller Spec
-  describe('Articles Controller Tests', function () {
+  // %PLURAL_CAPITALIZED% Controller Spec
+  describe('%PLURAL_CAPITALIZED% Controller Tests', function () {
     // Initialize global variables
-    var ArticlesController,
+    var %PLURAL_CAPITALIZED%Controller,
       scope,
       $httpBackend,
       $stateParams,
       $location,
       Authentication,
-      Articles,
-      mockArticle;
+      %PLURAL_CAPITALIZED%,
+      mock%CAPITALIZED%;
 
     // The $resource service augments the response object with methods for updating and deleting the resource.
     // If we were to use the standard toEqual matcher, our tests would fail because the test values would not match
@@ -38,7 +38,7 @@
     // The injector ignores leading and trailing underscores here (i.e. _$httpBackend_).
     // This allows us to inject a service but then attach it to a variable
     // with the same name as the service.
-    beforeEach(inject(function ($controller, $rootScope, _$location_, _$stateParams_, _$httpBackend_, _Authentication_, _Articles_) {
+    beforeEach(inject(function ($controller, $rootScope, _$location_, _$stateParams_, _$httpBackend_, _Authentication_, _%PLURAL_CAPITALIZED%_) {
       // Set a new global scope
       scope = $rootScope.$new();
 
@@ -47,12 +47,12 @@
       $httpBackend = _$httpBackend_;
       $location = _$location_;
       Authentication = _Authentication_;
-      Articles = _Articles_;
+      %PLURAL_CAPITALIZED% = _%PLURAL_CAPITALIZED%_;
 
-      // create mock article
-      mockArticle = new Articles({
+      // create mock %MODEL%
+      mock%CAPITALIZED% = new %PLURAL_CAPITALIZED%({
         _id: '525a8422f6d0f87f0e407a33',
-        title: 'An Article about MEAN',
+        title: 'An %CAPITALIZED% about MEAN',
         content: 'MEAN rocks!'
       });
 
@@ -61,62 +61,62 @@
         roles: ['user']
       };
 
-      // Initialize the Articles controller.
-      ArticlesController = $controller('ArticlesController', {
+      // Initialize the %PLURAL_CAPITALIZED% controller.
+      %PLURAL_CAPITALIZED%Controller = $controller('%PLURAL_CAPITALIZED%Controller', {
         $scope: scope
       });
     }));
 
-    it('$scope.find() should create an array with at least one article object fetched from XHR', inject(function (Articles) {
-      // Create a sample %PLURAL% array that includes the new article
-      var sampleArticles = [mockArticle];
+    it('$scope.find() should create an array with at least one %MODEL% object fetched from XHR', inject(function (%PLURAL_CAPITALIZED%) {
+      // Create a sample %PLURAL% array that includes the new %MODEL%
+      var sample%PLURAL_CAPITALIZED% = [mock%CAPITALIZED%];
 
       // Set GET response
-      $httpBackend.expectGET('api/%PLURAL%').respond(sampleArticles);
+      $httpBackend.expectGET('api/%PLURAL%').respond(sample%PLURAL_CAPITALIZED%);
 
       // Run controller functionality
       scope.find();
       $httpBackend.flush();
 
       // Test scope value
-      expect(scope.%PLURAL%).toEqualData(sampleArticles);
+      expect(scope.%PLURAL%).toEqualData(sample%PLURAL_CAPITALIZED%);
     }));
 
-    it('$scope.findOne() should create an array with one article object fetched from XHR using a articleId URL parameter', inject(function (Articles) {
+    it('$scope.findOne() should create an array with one %MODEL% object fetched from XHR using a %MODEL%Id URL parameter', inject(function (%PLURAL_CAPITALIZED%) {
       // Set the URL parameter
-      $stateParams.articleId = mockArticle._id;
+      $stateParams.%MODEL%Id = mock%CAPITALIZED%._id;
 
       // Set GET response
-      $httpBackend.expectGET(/api\/%PLURAL%\/([0-9a-fA-F]{24})$/).respond(mockArticle);
+      $httpBackend.expectGET(/api\/%PLURAL%\/([0-9a-fA-F]{24})$/).respond(mock%CAPITALIZED%);
 
       // Run controller functionality
       scope.findOne();
       $httpBackend.flush();
 
       // Test scope value
-      expect(scope.article).toEqualData(mockArticle);
+      expect(scope.%MODEL%).toEqualData(mock%CAPITALIZED%);
     }));
 
     describe('$scope.craete()', function () {
-      var sampleArticlePostData;
+      var sample%CAPITALIZED%PostData;
 
       beforeEach(function () {
-        // Create a sample article object
-        sampleArticlePostData = new Articles({
-          title: 'An Article about MEAN',
+        // Create a sample %MODEL% object
+        sample%CAPITALIZED%PostData = new %PLURAL_CAPITALIZED%({
+          title: 'An %CAPITALIZED% about MEAN',
           content: 'MEAN rocks!'
         });
 
         // Fixture mock form input values
-        scope.title = 'An Article about MEAN';
+        scope.title = 'An %CAPITALIZED% about MEAN';
         scope.content = 'MEAN rocks!';
 
         spyOn($location, 'path');
       });
 
-      it('should send a POST request with the form input values and then locate to new object URL', inject(function (Articles) {
+      it('should send a POST request with the form input values and then locate to new object URL', inject(function (%PLURAL_CAPITALIZED%) {
         // Set POST response
-        $httpBackend.expectPOST('api/%PLURAL%', sampleArticlePostData).respond(mockArticle);
+        $httpBackend.expectPOST('api/%PLURAL%', sample%CAPITALIZED%PostData).respond(mock%CAPITALIZED%);
 
         // Run controller functionality
         scope.create();
@@ -126,13 +126,13 @@
         expect(scope.title).toEqual('');
         expect(scope.content).toEqual('');
 
-        // Test URL redirection after the article was created
-        expect($location.path.calls.mostRecent().args[0]).toBe('%PLURAL%/' + mockArticle._id);
+        // Test URL redirection after the %MODEL% was created
+        expect($location.path.calls.mostRecent().args[0]).toBe('%PLURAL%/' + mock%CAPITALIZED%._id);
       }));
 
       it('should set scope.error if save error', function () {
         var errorMessage = 'this is an error message';
-        $httpBackend.expectPOST('api/%PLURAL%', sampleArticlePostData).respond(400, {
+        $httpBackend.expectPOST('api/%PLURAL%', sample%CAPITALIZED%PostData).respond(400, {
           message: errorMessage
         });
 
@@ -145,11 +145,11 @@
 
     describe('$scope.update()', function () {
       beforeEach(function () {
-        // Mock article in scope
-        scope.article = mockArticle;
+        // Mock %MODEL% in scope
+        scope.%MODEL% = mock%CAPITALIZED%;
       });
 
-      it('should update a valid article', inject(function (Articles) {
+      it('should update a valid %MODEL%', inject(function (%PLURAL_CAPITALIZED%) {
         // Set PUT response
         $httpBackend.expectPUT(/api\/%PLURAL%\/([0-9a-fA-F]{24})$/).respond();
 
@@ -158,10 +158,10 @@
         $httpBackend.flush();
 
         // Test URL location to new object
-        expect($location.path()).toBe('/%PLURAL%/' + mockArticle._id);
+        expect($location.path()).toBe('/%PLURAL%/' + mock%CAPITALIZED%._id);
       }));
 
-      it('should set scope.error to error response message', inject(function (Articles) {
+      it('should set scope.error to error response message', inject(function (%PLURAL_CAPITALIZED%) {
         var errorMessage = 'error';
         $httpBackend.expectPUT(/api\/%PLURAL%\/([0-9a-fA-F]{24})$/).respond(400, {
           message: errorMessage
@@ -174,19 +174,19 @@
       }));
     });
 
-    describe('$scope.remove(article)', function () {
+    describe('$scope.remove(%MODEL%)', function () {
       beforeEach(function () {
-        // Create new %PLURAL% array and include the article
-        scope.%PLURAL% = [mockArticle, {}];
+        // Create new %PLURAL% array and include the %MODEL%
+        scope.%PLURAL% = [mock%CAPITALIZED%, {}];
 
         // Set expected DELETE response
         $httpBackend.expectDELETE(/api\/%PLURAL%\/([0-9a-fA-F]{24})$/).respond(204);
 
         // Run controller functionality
-        scope.remove(mockArticle);
+        scope.remove(mock%CAPITALIZED%);
       });
 
-      it('should send a DELETE request with a valid articleId and remove the article from the scope', inject(function (Articles) {
+      it('should send a DELETE request with a valid %MODEL%Id and remove the %MODEL% from the scope', inject(function (%PLURAL_CAPITALIZED%) {
         expect(scope.%PLURAL%.length).toBe(1);
       }));
     });
@@ -194,7 +194,7 @@
     describe('scope.remove()', function () {
       beforeEach(function () {
         spyOn($location, 'path');
-        scope.article = mockArticle;
+        scope.%MODEL% = mock%CAPITALIZED%;
 
         $httpBackend.expectDELETE(/api\/%PLURAL%\/([0-9a-fA-F]{24})$/).respond(204);
 

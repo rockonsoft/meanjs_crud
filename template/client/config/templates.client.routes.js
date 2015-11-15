@@ -3,7 +3,7 @@
 // Setting up route
 angular.module('%PLURAL%').config(['$stateProvider',
   function ($stateProvider) {
-    // Articles state routing
+    // %PLURAL_CAPITALIZED% state routing
     $stateProvider
       .state('%PLURAL%', {
         abstract: true,
@@ -22,11 +22,11 @@ angular.module('%PLURAL%').config(['$stateProvider',
         templateUrl: 'modules/%PLURAL%/views/create-%PLURAL%.client.view.html'
       })
       .state('%PLURAL%.view', {
-        url: '/:articleId',
+        url: '/:%MODEL%Id',
         templateUrl: 'modules/%PLURAL%/views/view-%PLURAL%.client.view.html'
       })
       .state('%PLURAL%.edit', {
-        url: '/:articleId/edit',
+        url: '/:%MODEL%Id/edit',
         templateUrl: 'modules/%PLURAL%/views/edit-%PLURAL%.client.view.html'
       });
   }

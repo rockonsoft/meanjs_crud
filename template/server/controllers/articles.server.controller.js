@@ -5,106 +5,106 @@
  */
 var path = require('path'),
   mongoose = require('mongoose'),
-  Article = mongoose.model('Article'),
+  %CAPITALIZED% = mongoose.model('%CAPITALIZED%'),
   errorHandler = require(path.resolve('./modules/core/server/controllers/errors.server.controller'));
 
 /**
- * Create a article
+ * Create a %MODEL%
  */
 exports.create = function (req, res) {
-  var article = new Article(req.body);
-  article.user = req.user;
+  var %MODEL% = new %CAPITALIZED%(req.body);
+  %MODEL%.user = req.user;
 
-  article.save(function (err) {
+  %MODEL%.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(article);
+      res.json(%MODEL%);
     }
   });
 };
 
 /**
- * Show the current article
+ * Show the current %MODEL%
  */
 exports.read = function (req, res) {
-  res.json(req.article);
+  res.json(req.%MODEL%);
 };
 
 /**
- * Update a article
+ * Update a %MODEL%
  */
 exports.update = function (req, res) {
-  var article = req.article;
+  var %MODEL% = req.%MODEL%;
 
-  article.title = req.body.title;
-  article.content = req.body.content;
+  %MODEL%.title = req.body.title;
+  %MODEL%.content = req.body.content;
 
-  article.save(function (err) {
+  %MODEL%.save(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(article);
+      res.json(%MODEL%);
     }
   });
 };
 
 /**
- * Delete an article
+ * Delete an %MODEL%
  */
 exports.delete = function (req, res) {
-  var article = req.article;
+  var %MODEL% = req.%MODEL%;
 
-  article.remove(function (err) {
+  %MODEL%.remove(function (err) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(article);
+      res.json(%MODEL%);
     }
   });
 };
 
 /**
- * List of Articles
+ * List of %PLURAL_CAPITALIZED%
  */
 exports.list = function (req, res) {
-  Article.find().sort('-created').populate('user', 'displayName').exec(function (err, articles) {
+  %CAPITALIZED%.find().sort('-created').populate('user', 'displayName').exec(function (err, %PLURAL%) {
     if (err) {
       return res.status(400).send({
         message: errorHandler.getErrorMessage(err)
       });
     } else {
-      res.json(articles);
+      res.json(%PLURAL%);
     }
   });
 };
 
 /**
- * Article middleware
+ * %CAPITALIZED% middleware
  */
-exports.articleByID = function (req, res, next, id) {
+exports.%MODEL%ByID = function (req, res, next, id) {
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).send({
-      message: 'Article is invalid'
+      message: '%CAPITALIZED% is invalid'
     });
   }
 
-  Article.findById(id).populate('user', 'displayName').exec(function (err, article) {
+  %CAPITALIZED%.findById(id).populate('user', 'displayName').exec(function (err, %MODEL%) {
     if (err) {
       return next(err);
-    } else if (!article) {
+    } else if (!%MODEL%) {
       return res.status(404).send({
-        message: 'No article with that identifier has been found'
+        message: 'No %MODEL% with that identifier has been found'
       });
     }
-    req.article = article;
+    req.%MODEL% = %MODEL%;
     next();
   });
 };

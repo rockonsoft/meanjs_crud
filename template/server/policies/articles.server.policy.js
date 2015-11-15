@@ -9,7 +9,7 @@ var acl = require('acl');
 acl = new acl(new acl.memoryBackend());
 
 /**
- * Invoke Articles Permissions
+ * Invoke %PLURAL_CAPITALIZED% Permissions
  */
 exports.invokeRolesPolicies = function () {
   acl.allow([{
@@ -18,7 +18,7 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/%PLURAL%',
       permissions: '*'
     }, {
-      resources: '/api/%PLURAL%/:articleId',
+      resources: '/api/%PLURAL%/:%MODEL%Id',
       permissions: '*'
     }]
   }, {
@@ -27,7 +27,7 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/%PLURAL%',
       permissions: ['get', 'post']
     }, {
-      resources: '/api/%PLURAL%/:articleId',
+      resources: '/api/%PLURAL%/:%MODEL%Id',
       permissions: ['get']
     }]
   }, {
@@ -36,20 +36,20 @@ exports.invokeRolesPolicies = function () {
       resources: '/api/%PLURAL%',
       permissions: ['get']
     }, {
-      resources: '/api/%PLURAL%/:articleId',
+      resources: '/api/%PLURAL%/:%MODEL%Id',
       permissions: ['get']
     }]
   }]);
 };
 
 /**
- * Check If Articles Policy Allows
+ * Check If %PLURAL_CAPITALIZED% Policy Allows
  */
 exports.isAllowed = function (req, res, next) {
   var roles = (req.user) ? req.user.roles : ['guest'];
 
-  // If an article is being processed and the current user created it then allow any manipulation
-  if (req.article && req.user && req.article.user.id === req.user.id) {
+  // If an %MODEL% is being processed and the current user created it then allow any manipulation
+  if (req.%MODEL% && req.user && req.%MODEL%.user.id === req.user.id) {
     return next();
   }
 

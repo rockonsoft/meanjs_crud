@@ -1,21 +1,21 @@
 'use strict';
 
-// Articles controller
-angular.module('articles').controller('%PLURAL_CAPITALIZED%Controller', ['$scope', '$stateParams', '$location', 'Authentication', '%PLURAL_CAPITALIZED%',
-  function ($scope, $stateParams, $location, Authentication, Articles) {
+// %PLURAL_CAPITALIZED% controller
+angular.module('%PLURAL%').controller('%PLURAL_CAPITALIZED%Controller', ['$scope', '$stateParams', '$location', 'Authentication', '%PLURAL_CAPITALIZED%',
+  function ($scope, $stateParams, $location, Authentication, %PLURAL_CAPITALIZED%) {
     $scope.authentication = Authentication;
 
-    // Create new Article
+    // Create new %CAPITALIZED%
     $scope.create = function () {
-      // Create new Article object
-      var article = new Articles({
+      // Create new %CAPITALIZED% object
+      var %MODEL% = new %PLURAL_CAPITALIZED%({
         title: this.title,
         content: this.content
       });
 
       // Redirect after save
-      article.$save(function (response) {
-        $location.path('articles/' + response._id);
+      %MODEL%.$save(function (response) {
+        $location.path('%PLURAL%/' + response._id);
 
         // Clear form fields
         $scope.title = '';
@@ -25,43 +25,43 @@ angular.module('articles').controller('%PLURAL_CAPITALIZED%Controller', ['$scope
       });
     };
 
-    // Remove existing Article
-    $scope.remove = function (article) {
-      if (article) {
-        article.$remove();
+    // Remove existing %CAPITALIZED%
+    $scope.remove = function (%MODEL%) {
+      if (%MODEL%) {
+        %MODEL%.$remove();
 
-        for (var i in $scope.articles) {
-          if ($scope.articles[i] === article) {
-            $scope.articles.splice(i, 1);
+        for (var i in $scope.%PLURAL%) {
+          if ($scope.%PLURAL%[i] === %MODEL%) {
+            $scope.%PLURAL%.splice(i, 1);
           }
         }
       } else {
-        $scope.article.$remove(function () {
-          $location.path('articles');
+        $scope.%MODEL%.$remove(function () {
+          $location.path('%PLURAL%');
         });
       }
     };
 
-    // Update existing Article
+    // Update existing %CAPITALIZED%
     $scope.update = function () {
-      var article = $scope.article;
+      var %MODEL% = $scope.%MODEL%;
 
-      article.$update(function () {
-        $location.path('articles/' + article._id);
+      %MODEL%.$update(function () {
+        $location.path('%PLURAL%/' + %MODEL%._id);
       }, function (errorResponse) {
         $scope.error = errorResponse.data.message;
       });
     };
 
-    // Find a list of Articles
+    // Find a list of %PLURAL_CAPITALIZED%
     $scope.find = function () {
-      $scope.articles = Articles.query();
+      $scope.%PLURAL% = %PLURAL_CAPITALIZED%.query();
     };
 
-    // Find existing Article
+    // Find existing %CAPITALIZED%
     $scope.findOne = function () {
-      $scope.article = Articles.get({
-        articleId: $stateParams.articleId
+      $scope.%MODEL% = %PLURAL_CAPITALIZED%.get({
+        %MODEL%Id: $stateParams.%MODEL%Id
       });
     };
   }
