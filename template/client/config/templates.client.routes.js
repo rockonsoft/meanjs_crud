@@ -19,15 +19,15 @@ angular.module('%PLURAL%').config(['$stateProvider',
       })
       .state('%PLURAL%.create', {
         url: '/create',
-        templateUrl: 'modules/%PLURAL%/views/create-%PLURAL%.client.view.html'
+        templateUrl: 'modules/%PLURAL%/views/create-%MODEL%.client.view.html'
       })
       .state('%PLURAL%.view', {
         url: '/:%MODEL%Id',
-        templateUrl: 'modules/%PLURAL%/views/view-%PLURAL%.client.view.html'
+        templateUrl: 'modules/%PLURAL%/views/view-%MODEL%.client.view.html'
       })
       .state('%PLURAL%.edit', {
         url: '/:%MODEL%Id/edit',
-        templateUrl: 'modules/%PLURAL%/views/edit-%PLURAL%.client.view.html'
+        templateUrl: 'modules/%PLURAL%/views/edit-%MODEL%.client.view.html'
       });
   }
 ]);
